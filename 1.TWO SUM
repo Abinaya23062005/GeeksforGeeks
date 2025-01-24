@@ -1,0 +1,62 @@
+1.Two Sum - Pair with Given Sum
+
+Example:
+Input: arr[] = [1, 4, 45, 6, 10, 8], target = 16
+Output: true
+Explanation: arr[3] + arr[4] = 6 + 10 = 16.
+Input: arr[] = [1, 2, 4, 3, 6], target = 11
+Output: false
+Explanation: None of the pair makes a sum of 11.
+Input: arr[] = [11], target = 11
+Output: false
+Explanation: No pair is possible as only one element is present in arr[].
+Constraints:
+1 ≤ arr.size ≤ 105
+1 ≤ arr[i] ≤ 105
+1 ≤ target ≤ 2*105
+
+Solution:
+#JAVA CODE:
+
+class Solution{
+     public boolean twoSum(int[] arr, int target){
+         Map<Integer, Integer> map = new HashMap<>();
+         for (int i=0; i<arr.length; i++){
+             if(map.containsKey(target - arr[i])){
+                 return true;
+             }
+             map.put(arr[i], i);
+         }
+         return false;
+     }
+         
+}
+
+
+EXPLAINATION ABOUT THE CODE:
+
+For arr = {2, 7, 11, 15} and target = 9:
+
+Initialize map as an empty HashMap.
+First iteration (i = 0, arr[i] = 2):
+Complement = 9 - 2 = 7.
+map.containsKey(7) → false.
+Add 2 to the map: map = {2: 0}.
+Second iteration (i = 1, arr[i] = 7):
+Complement = 9 - 7 = 2.
+map.containsKey(2) → true.
+Return true.
+The pair {2, 7} is found, so the method terminates early and returns true.
+
+Key Points
+Efficiency: This algorithm runs in 
+𝑂(𝑛)
+O(n) time because it processes each element once.
+Space Complexity: The space complexity is 
+𝑂(𝑛)
+O(n) due to the map storing at most 
+𝑛
+n elements (where 𝑛 n is the length of the array).
+Use of HashMap: The HashMap allows for fast lookups (
+𝑂(1)
+O(1) average time complexity for containsKey and put).
