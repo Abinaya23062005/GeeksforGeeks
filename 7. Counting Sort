@@ -1,0 +1,86 @@
+COUNTING SORT ALGORITHMS:
+
+Given a string arr consisting of lowercase english letters, arrange all its letters in lexicographical order using Counting Sort.
+
+Example 1:
+
+Input:
+N = 5
+S = "edsab"
+Output:
+abdes
+Explanation: 
+In lexicographical order, string will be 
+abdes.
+Example 2:
+
+Input:
+N = 13
+S = "geeksforgeeks"
+Output:
+eeeefggkkorss
+Explanation:
+In lexicographical order, string will be 
+eeeefggkkorss.
+ EXPLAINATION ABOUT THE CODE:
+
+Initialize a frequency array
+
+java
+Copy
+Edit
+int[] count = new int[26]; // Since only lowercase letters
+The array stores the frequency of each character (from 'a' to 'z').
+Count occurrences of each character
+
+java
+Copy
+Edit
+for (char ch : s.toCharArray()) {
+    count[ch - 'a']++; // Normalizes the index
+}
+This converts 'a' to index 0, 'b' to index 1, ..., 'z' to index 25.
+Construct the sorted string
+
+java
+Copy
+Edit
+for (int i = 0; i < 26; i++) {
+    while (count[i] > 0) {
+        sortedString.append((char) (i + 'a'));
+        count[i]--;
+    }
+}
+We append each character in increasing order based on frequency.
+Time and Space Complexity
+✅ Time Complexity: O(N) (as we iterate through the string twice).
+✅ Space Complexity:O(1) (as the frequency array is fixed at size 26).
+
+SOLUTION OF TEH ABOVE PROBLEM:
+#JAVA CODE:
+
+class Solution
+{
+     public static String countSort(String arr){
+     int[] count = new int[26];
+    {
+        for (char ch : arr.toCharArray()) {
+            count[ch - 'a']++;
+        }
+
+        StringBuilder sortedString = new StringBuilder();
+        for (int i = 0; i < 26; i++) {
+            while (count[i] > 0) {
+                sortedString.append((char) (i + 'a')); // Convert index back to character
+                count[i]--;
+            }
+        }
+
+        return sortedString.toString();
+    }
+    
+ }
+    
+}
+
+
