@@ -1,0 +1,28 @@
+8. CHECK IF ARRAY CONTAINS DUPLICATE.
+
+Given an integer array arr[], check if the array contains any duplicate value.
+
+Examples:
+
+Input: arr = [4, 5, 6, 4]
+Output: true
+Explaination: 4 is the duplicate value.
+Input: arr = [1, 2, 3, 4]
+Output: false
+Explaination: All values are distinct.
+PROBLEM OF THE ABOVE SOLUTION:
+
+#JAVA CODE:
+
+class Solution {
+    public boolean checkDuplicates(int arr[]) {
+        Set<Integer> set = new HashSet<>();
+        for(int num : arr){
+            if(set.contains(num)){
+                return true;
+            }
+            set.add(num);
+        }
+       return false;
+    }
+}
