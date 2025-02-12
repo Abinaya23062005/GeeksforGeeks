@@ -1,0 +1,42 @@
+11. FIND FIRST AND LAST DIGIT OF THE NUMBER:
+
+
+Given a number N, find the sum of first and last digit of N.
+
+Example 1:
+
+Input: N = 12345
+Output: 6
+Explanation: 1st and last digits are 1 and 5.
+Example 2:
+
+Input: 98562
+Output: 11
+Explanation: 1st and last digits are 9 and 2. 
+ SOLUTION OF THE ABOVE PROBLEM:
+
+#JAVA CODE:
+class Solution
+{
+    public int corner_digitSum(int n)
+    {
+
+        n = Math.abs(n); 
+
+        int lastDigit = n % 10; 
+        int firstDigit = n; 
+        
+        while (firstDigit >= 10) { 
+            firstDigit /= 10;
+        }
+        
+        return firstDigit + lastDigit; 
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.corner_digitSum(1234)); 
+        System.out.println(sol.corner_digitSum(-5678)); 
+  
+
+    }
+}
