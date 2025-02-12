@@ -1,0 +1,43 @@
+14. REVERSE DIGITS:
+
+
+You are given an integer n. Your task is to reverse the digits, ensuring that the reversed number has no leading zeroes.
+
+Examples:
+
+Input: 200
+Output: 2
+Explanation: By reversing the digits of number, number will change into 2.
+Input : 122
+Output: 221
+Explanation: By reversing the digits of number, number will change into 221.
+SOLUTION OF THE ABOVE PROBLEM:
+
+#JAVA CODE:
+
+class Solution {
+    public int reverseDigits(int n) {
+        boolean isNegative = n < 0; // Check if number is negative
+        n = Math.abs(n); // Convert to positive for processing
+        
+        int reversed = 0;
+        
+        while (n > 0) {
+            int digit = n % 10; // Extract last digit
+            reversed = reversed * 10 + digit; // Build reversed number
+            n /= 10; // Remove last digit
+        }
+        
+        return isNegative ? -reversed : reversed; // Restore sign if negative
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test cases
+        System.out.println(sol.reverseDigits(1234));   // Output: 4321
+        System.out.println(sol.reverseDigits(-987));   // Output: -789
+        System.out.println(sol.reverseDigits(1000));   // Output: 1
+        System.out.println(sol.reverseDigits(5));      // Output: 5
+    }
+}
