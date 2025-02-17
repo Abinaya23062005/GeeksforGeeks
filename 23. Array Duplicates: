@@ -1,0 +1,36 @@
+ 23. Array Duplicates:
+
+Given an array arr of integers, find all the elements that occur more than once in the array. If no element repeats, return an empty array.
+
+Examples:
+
+Input: arr[] = [2, 3, 1, 2, 3]
+Output: [2, 3] 
+Explanation: 2 and 3 occur more than once in the given array.
+Input: arr[] = [0, 3, 1, 2] 
+Output: [] 
+Explanation: There is no repeating element in the array, so the output is empty.
+Input: arr[] = [2]
+Output: [] 
+Explanation: There is single element in the array. Therefore output is empty.
+
+#JAVA CODE:
+
+class Solution {
+    public List<Integer> findDuplicates(int[] arr) {
+        HashSet<Integer> seen = new HashSet<>();
+       List<Integer> duplicates = new ArrayList<>();
+
+            for (int num : arr) {
+            if (seen.contains(num)) {
+                if (!duplicates.contains(num)) {
+                    duplicates.add(num);
+                }
+            } else {
+                seen.add(num);
+            }
+        }
+        
+        return duplicates.isEmpty() ? List.of(-1) : duplicates; // Return [-1] if no duplicates found
+    }
+}
