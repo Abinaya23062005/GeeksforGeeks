@@ -1,0 +1,32 @@
+32.Check if array is sorted
+
+Given an array arr[], check whether it is sorted in non-decreasing order. Return true if it is sorted otherwise false.
+
+Examples:
+
+Input: arr[] = [10, 20, 30, 40, 50]
+Output: true
+Explanation: The given array is sorted.
+Input: arr[] = [90, 80, 100, 70, 40, 30]
+Output: false
+Explanation: The given array is not sorted.
+SOLUTION OF THE ABOVE PROBLEM:
+#JAVA CODE:
+
+class Solution {
+    public boolean arraySortedOrNot(int[] arr) {
+        int n = arr.length;
+        
+        // Single-element arrays or empty arrays are considered sorted
+        if (n == 0 || n == 1) {
+            return true;
+        }
+        
+        for (int i = 1; i < n; i++) { // Start from index 1
+            if (arr[i] < arr[i - 1]) { // If any element is smaller than the previous, return false
+                return false;
+            }
+        }
+        return true; // If loop completes, array is sorted
+    }
+}
