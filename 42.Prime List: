@@ -1,0 +1,80 @@
+42.Prime List:
+
+
+You are given the head of a linked list. You have to replace all the values of the nodes with the nearest prime number. If more than one prime number exists at an equal distance, choose the smallest one. Return the head of the modified linked list.
+
+Examples :
+
+Input: head = 2 → 6 → 10
+Output: 2 → 5 → 11
+
+Explanation: The nearest prime of 2 is 2 itself. The nearest primes of 6 are 5 and 7, since 5 is smaller so, 5 will be chosen. The nearest prime of 10 is 11.
+Input: head = 1 → 15 → 20
+Output: 2 → 13 → 19
+
+Explanation: The nearest prime of 1 is 2. The nearest primes of 15 are 13 and 17, since 13 is smaller so, 13 will be chosen. The nearest prime of 20 is 19.
+Constraints:
+1 <= no. of Nodes <= 104
+1 <= node.val <= 104
+
+SOLUTION OF THE ABOVE PROBLEM:
+
+#JAVA CODE:
+
+class Solution {
+    static final int MAX = 100010;
+    static List<Integer> primes = new ArrayList<>();
+    static boolean[] isPrime = new boolean[MAX];
+
+    // Static block to precompute all primes using Sieve of Eratosthenes
+    static {
+        Arrays.fill(isPrime, true);
+        isPrime[0] = isPrime[1] = false;
+        for (int i = 2; i * i < MAX; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j < MAX; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        for (int i = 2; i < MAX; i++) {
+            if (isPrime[i]) primes.add(i);
+        }
+    }
+
+    Node primeList(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            curr.val = getNearestPrime(curr.val);
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    // Binary search to find the nearest prime to a given value
+    private int getNearestPrime(int val) {
+        int left = 0, right = primes.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int midVal = primes.get(mid);
+            if (midVal == val) {
+                return val; // already a prime
+            } else if (midVal < val) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        int lowerPrime = right >= 0 ? primes.get(right) : Integer.MIN_VALUE;
+        int higherPrime = left < primes.size() ? primes.get(left) : Integer.MAX_VALUE;
+
+        // Choose the closest prime (smaller if equally distant)
+        if (Math.abs(lowerPrime - val) <= Math.abs(higherPrime - val)) {
+            return lowerPrime;
+        } else {
+            return higherPrime;
+        }
+    }
+}
